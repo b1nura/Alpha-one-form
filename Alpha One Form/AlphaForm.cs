@@ -12,6 +12,13 @@ namespace Alpha_One_Form
         static string Password = "Bathalaya1";
         public static void Main(string[] args)
         {
+            int term = 2;
+            
+            
+            
+            
+            
+            
             var options = new ChromeOptions();
             options.AddArguments(@"C:\Users\binur\AppData\Local\Google\Chrome\User Data");
             options.AddExcludedArgument("enable-automation");
@@ -100,7 +107,11 @@ namespace Alpha_One_Form
 
             btnSubmitForm.Click();
 
+            Thread.Sleep(6000);
 
+            IWebElement drpChooseTerm = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]"));
+
+            drpChooseTerm.Click();
 
 
         }
