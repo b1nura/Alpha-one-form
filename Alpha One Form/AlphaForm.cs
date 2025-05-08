@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Xml.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
@@ -23,6 +24,8 @@ namespace Alpha_One_Form
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
             driver.Navigate().GoToUrl("https://tinyurl.com/submit-hw/");
 
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+
             IWebElement txtGoogleGmail = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/c-wiz/div/div[2]/div/div/div[1]/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input"));
             txtGoogleGmail.SendKeys(gmail + Keys.Enter);
 
@@ -30,78 +33,75 @@ namespace Alpha_One_Form
             txtGooglePassword.SendKeys(Password + Keys.Enter);
 
 
-            System.Threading.Thread.Sleep(10000); // 10 seconds (10000 ms)
+            System.Threading.Thread.Sleep(1000); // 10 seconds (10000 ms)
+
+            IWebElement btnClearForm = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[3]/div[1]/div[2]/div/span/span"));
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", btnClearForm);
+            btnClearForm.Click();
+
+            System.Threading.Thread.Sleep(1000); // 10 seconds (10000 ms)
+
+            IWebElement btnAClearForm = driver.FindElement(By.XPath("/html/body/div[3]/div/div[2]/div[3]/div[2]/span/span"));
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", btnAClearForm);
+            btnAClearForm.Click();
 
 
+            System.Threading.Thread.Sleep(1000);
 
             IWebElement txtAlphaEmail = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div[1]/div[2]/div[1]/div/div[1]/input"));
-            txtAlphaEmail.Clear();
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", txtAlphaEmail);
             txtAlphaEmail.SendKeys("maladhikary@gmail.com");
 
 
+            System.Threading.Thread.Sleep(1000);
+
             IWebElement txtAlphaFirstName = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input"));
-            txtAlphaFirstName.Clear();
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", txtAlphaFirstName);
             txtAlphaFirstName.SendKeys("Binura");
 
+            System.Threading.Thread.Sleep(1000);
+
             IWebElement txtAlphaLastName = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input"));
-            txtAlphaLastName.Clear();
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", txtAlphaLastName);
             txtAlphaLastName.SendKeys("Waniga Baduge");
 
-            if (driver.FindElements(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div[1]/div[3]")).Count > 0)
-            {
-                if (driver.FindElements(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div[1]/div[7]")).Count > 0)
-                {
-                    IWebElement txtTutorName = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div"));
-                    txtTutorName.Clear();
-                    txtTutorName.SendKeys("Amanda");
-                }
-                else
-                {
-                    IWebElement drpChooseCourse = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div[1]/div[1]"));
-                    drpChooseCourse.Click();
+            System.Threading.Thread.Sleep(1000);
 
-                    Thread.Sleep(1000);
+            IWebElement txtTutorName = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div[1]/div/div[1]/input"));
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", txtTutorName);
+            txtTutorName.SendKeys("Amanda");
 
-                    IWebElement optChoseYear10 = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[2]/div[7]"));
-                    optChoseYear10.Click();
+            System.Threading.Thread.Sleep(1000);
 
-                    IWebElement txtTutorName = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div"));
-                    txtTutorName.Clear();
-                    txtTutorName.SendKeys("Amanda");
-                }
+            IWebElement drpChooseCourse = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div[1]/div[1]"));
+            drpChooseCourse.Click();
 
-            }
-            else
-            {
-                IWebElement drpChooseCentre = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div[1]/div[1]"));
-                drpChooseCentre.Click();
+            System.Threading.Thread.Sleep(1000);
 
-                Thread.Sleep(1000);
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", drpChooseCourse);
+            IWebElement optChoseYear10 = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[2]/div[7]"));
+            optChoseYear10.Click();
 
-                IWebElement optChoseBellaVista = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[2]/div[3]"));
-                optChoseBellaVista.Click();
 
-                if (driver.FindElements(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div[1]/div[7]")).Count > 0)
-                {
-                    IWebElement txtTutorName = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div"));
-                    txtTutorName.Clear();
-                    txtTutorName.SendKeys("Amanda");
-                }
-                else
-                {
-                    IWebElement drpChooseCourse = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div[1]/div[1]"));
-                    drpChooseCourse.Click();
+            System.Threading.Thread.Sleep(1000);
 
-                    Thread.Sleep(1000);
+            IWebElement drpChooseCentre = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div[1]/div[1]"));
+            drpChooseCentre.Click();
 
-                    IWebElement optChoseYear10 = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[2]/div[7]"));
-                    optChoseYear10.Click();
+            System.Threading.Thread.Sleep(1000);
 
-                    IWebElement txtTutorName = driver.FindElement(By.XPath("/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div"));
-                    txtTutorName.Clear();
-                    txtTutorName.SendKeys("Amanda");
-                }
-            }
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", drpChooseCentre);
+            IWebElement optChoseBellaVista = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[2]/div[3]"));
+            optChoseBellaVista.Click();
+
+            Thread.Sleep(1000);
+
+            IWebElement btnSubmitForm = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span"));
+
+            btnSubmitForm.Click();
+
+
+
 
         }
     }
